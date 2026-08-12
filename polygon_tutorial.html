@@ -1,0 +1,1658 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Polygon Tutorial &#8212; h3-py</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'polygon_tutorial';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
+    <link rel="canonical" href="https://uber.github.io/h3-py/polygon_tutorial.html" />
+    <link rel="icon" href="_static/logo.svg"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Comparison of APIs" href="api_comparison.html" />
+    <link rel="prev" title="API Verbose Reference" href="api_verbose.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
+  </head>
+  <body data-default-mode="">
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+  
+  
+  
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.svg" class="logo__image only-light" alt="h3-py - Home"/>
+    <img src="_static/logo.svg" class="logo__image only-dark pst-js-only" alt="h3-py - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">h3-py</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_quick.html">API Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_verbose.html">API Verbose Reference</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Polygon Tutorial</a></li>
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="api_comparison.html">Comparison of APIs</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Sundries</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="project_links.html">Project Links</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/uber/h3-py" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/uber/h3-py/edit/master/docs/polygon_tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/polygon_tutorial.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Polygon Tutorial</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Polygon Tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngpoly">LatLngPoly</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-representation-and-attributes">String representation and attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geo-interface"><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polygon-to-cells">Polygon to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h3-polygons-don-t-need-to-follow-the-right-hand-rule">H3 Polygons don’t need to follow the right-hand rule</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngmultipoly">LatLngMultiPoly</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipolygon-to-cells">MultiPolygon to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngmultipoly-affordances">LatLngMultiPoly affordances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cells-to-latlngpoly-or-latlngmultipoly">Cells to LatLngPoly or LatLngMultiPoly</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#api-summary">API Summary</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalance-notes">Equivalance notes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacing-with-geopandas-and-other-libraries">Interfacing with GeoPandas and other libraries</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-compatible-crs-before-applying-h3-functions">Use a compatible CRS before applying H3 functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-a-geo-to-h3-cells">Converting a geo to H3 cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-all-geos-in-a-geodataframe-to-cells">Converting all geos in a GeoDataFrame to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-cells-to-geo-objects">Converting cells to “geo objects”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-h3-cells">Visualizing H3 cells</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="polygon-tutorial">
+<h1>Polygon Tutorial<a class="headerlink" href="#polygon-tutorial" title="Link to this heading">#</a></h1>
+<p><code class="docutils literal notranslate"><span class="pre">h3-py</span></code> can convert between sets of cells and GeoJSON-like polygon and multipolygon shapes.</p>
+<p>We use the abstract base class <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> and its concrete child classes <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code>
+to represent these shapes.
+Any references or function names that use “H3Shape” will apply to both <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> objects.</p>
+<p><code class="docutils literal notranslate"><span class="pre">h3-py</span></code> is also compatible with Python objects that implement <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> (<a class="reference external" href="https://gist.github.com/sgillies/2217756">https://gist.github.com/sgillies/2217756</a>),
+making it easy to interface with other Python geospatial libraries.
+We’ll refer to any such object as a “geo” or “geo object”.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> both implement <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> (making them geo objects themselves),
+and can be created from other geo objects, like Shapely’s <code class="docutils literal notranslate"><span class="pre">Polygon</span></code> or <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> objects that occur
+when using <code class="docutils literal notranslate"><span class="pre">geopandas</span></code>.</p>
+<p>Below, we’ll explain the <code class="docutils literal notranslate"><span class="pre">h3-py</span></code> API for working with these shapes, and how the library interacts
+with other Python geospatial libraries.</p>
+<p>To start, we’ll import relevant libraries, and define some plotting helper functions to visualize the shapes we’re dealing with.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">h3</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geodatasets</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">contextily</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">cx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="s2">&quot;Plot based on the `geometry` column of a GeoPandas dataframe&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">3857</span><span class="p">)</span>  <span class="c1"># web mercator</span>
+
+    <span class="k">if</span> <span class="n">ax</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+        <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+        <span class="n">column</span><span class="o">=</span><span class="n">column</span><span class="p">,</span> <span class="n">categorical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">legend_kwds</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;loc&#39;</span><span class="p">:</span> <span class="s1">&#39;upper left&#39;</span><span class="p">},</span>
+    <span class="p">)</span>
+    <span class="n">cx</span><span class="o">.</span><span class="n">add_basemap</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">crs</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cx</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">CartoDB</span><span class="o">.</span><span class="n">Positron</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_shape</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">({</span><span class="s1">&#39;geometry&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">shape</span><span class="p">]},</span> <span class="n">crs</span><span class="o">=</span><span class="s1">&#39;EPSG:4326&#39;</span><span class="p">)</span>
+    <span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_cells</span><span class="p">(</span><span class="n">cells</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">cells_to_h3shape</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+    <span class="n">plot_shape</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_shape_and_cells</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plot_shape</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">plot_cells</span><span class="p">(</span><span class="n">h3</span><span class="o">.</span><span class="n">h3shape_to_cells</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">res</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/work/h3-py/h3-py/.venv/lib/python3.11/site-packages/tqdm/auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="latlngpoly">
+<h1>LatLngPoly<a class="headerlink" href="#latlngpoly" title="Link to this heading">#</a></h1>
+<p>We can create a simple <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> object by providing a list of the <strong>latitude/longitude pairs</strong> that describe its exterior.
+Optionally, holes can be added to the polygon by appending additional lat/lng lists do describe them.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">outer</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">37.804</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.412</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.778</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.507</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.733</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.501</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">plot_shape</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3]&gt;
+</pre></div>
+</div>
+<img alt="_images/d89ef7ed43314d33d3d60645d6547d8de715359b5691b6ed0a7f91cfc4038b5c.png" src="_images/d89ef7ed43314d33d3d60645d6547d8de715359b5691b6ed0a7f91cfc4038b5c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hole1</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">37.782</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.449</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.779</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.465</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.788</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.454</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">,</span> <span class="n">hole1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">plot_shape</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3/(3,)]&gt;
+</pre></div>
+</div>
+<img alt="_images/730ea69a22d0f588cbaa1be0ce5bad8e22ff44db275188434dd28f777a420eb0.png" src="_images/730ea69a22d0f588cbaa1be0ce5bad8e22ff44db275188434dd28f777a420eb0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hole2</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">37.771</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.484</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.761</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.481</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.758</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.494</span><span class="p">),</span>
+    <span class="p">(</span><span class="mf">37.769</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.496</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">,</span> <span class="n">hole1</span><span class="p">,</span> <span class="n">hole2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+<span class="n">plot_shape</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3/(3, 4)]&gt;
+</pre></div>
+</div>
+<img alt="_images/cc7bc2561426d42d2fcf05169ec601be629879e9a895e09af1a50f6ba677f42e.png" src="_images/cc7bc2561426d42d2fcf05169ec601be629879e9a895e09af1a50f6ba677f42e.png" />
+</div>
+</div>
+<section id="string-representation-and-attributes">
+<h2>String representation and attributes<a class="headerlink" href="#string-representation-and-attributes" title="Link to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> string representation given by its <code class="docutils literal notranslate"><span class="pre">__repr__</span></code> shows the number of vertices in the outer loop of the polygon, followed
+by the number of vertices in each hole.</p>
+<p>A representation like</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">LatLngPoly</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>denotes a polygon whose outer boundary consists of 3 vertices and which has 2 holes,
+with 3 and 4 vertices respectively.</p>
+<p>We can access the coordinates describing the polygon through the attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LatLngPoly.outer</span></code> gives the list of lat/lng points making up the outer loop of the polygon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LatLngPoly.holes</span></code> gives each of the lists of lat/lng points making up the holes of the polygon.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">,</span> <span class="n">hole1</span><span class="p">,</span> <span class="n">hole2</span><span class="p">)</span>
+<span class="n">poly</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3/(3, 4)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly</span><span class="o">.</span><span class="n">outer</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((37.804, -122.412), (37.778, -122.507), (37.733, -122.501))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly</span><span class="o">.</span><span class="n">holes</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>([(37.782, -122.449), (37.779, -122.465), (37.788, -122.454)],
+ [(37.771, -122.484),
+  (37.761, -122.481),
+  (37.758, -122.494),
+  (37.769, -122.496)])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="geo-interface">
+<h2><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code><a class="headerlink" href="#geo-interface" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LatLngPoly.__geo_interface__</span></code> gives a GeoJSON representation of the polygon as described in <a class="reference external" href="https://gist.github.com/sgillies/2217756">https://gist.github.com/sgillies/2217756</a></p>
+<p><strong>Note the differences in this representation</strong>: Points are given in <strong>lng/lat</strong> order (but the <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> constructor expects <strong>lat/lng</strong> order), and the last vertex repeats the first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">poly</span><span class="o">.</span><span class="n">__geo_interface__</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;type&#39;: &#39;Polygon&#39;,
+ &#39;coordinates&#39;: (((-122.412, 37.804),
+   (-122.507, 37.778),
+   (-122.501, 37.733),
+   (-122.412, 37.804)),
+  ((-122.449, 37.782),
+   (-122.465, 37.779),
+   (-122.454, 37.788),
+   (-122.449, 37.782)),
+  ((-122.484, 37.771),
+   (-122.481, 37.761),
+   (-122.494, 37.758),
+   (-122.496, 37.769),
+   (-122.484, 37.771)))}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">outer</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly</span><span class="o">.</span><span class="n">holes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>((37.804, -122.412), (37.778, -122.507), (37.733, -122.501))
+([(37.782, -122.449), (37.779, -122.465), (37.788, -122.454)], [(37.771, -122.484), (37.761, -122.481), (37.758, -122.494), (37.769, -122.496)])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can create an <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> object from a GeoJSON-like dictionary or an object that implements <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> using <code class="docutils literal notranslate"><span class="pre">h3.geo_to_h3shape()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h3</span><span class="o">.</span><span class="n">geo_to_h3shape</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3/(3, 4)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">MockGeo</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">d</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__geo_interface__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span>
+
+
+<span class="n">geo</span> <span class="o">=</span> <span class="n">MockGeo</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">h3</span><span class="o">.</span><span class="n">geo_to_h3shape</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3/(3, 4)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Also note that <code class="docutils literal notranslate"><span class="pre">LatLngPoly.__geo_interface__</span></code> is equivalent to calling <code class="docutils literal notranslate"><span class="pre">h3.h3shape_to_geo()</span></code> on an <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly</span><span class="o">.</span><span class="n">__geo_interface__</span> <span class="o">==</span> <span class="n">h3</span><span class="o">.</span><span class="n">h3shape_to_geo</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="polygon-to-cells">
+<h2>Polygon to cells<a class="headerlink" href="#polygon-to-cells" title="Link to this heading">#</a></h2>
+<p>We can get all the H3 cells whose centroids fall within an <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> by using <code class="docutils literal notranslate"><span class="pre">h3.h3shape_to_cells()</span></code> and specifying the resolution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h3</span><span class="o">.</span><span class="n">h3shape_to_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;872830958ffffff&#39;, &#39;87283095bffffff&#39;, &#39;87283095affffff&#39;, &#39;872830829ffffff&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll use a helper function to show a few different resolutions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9a8a9a25a174c4897236aeaed58f6afdaabbe9ea5006a60569771f92e1a58b00.png" src="_images/9a8a9a25a174c4897236aeaed58f6afdaabbe9ea5006a60569771f92e1a58b00.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/cf2e9f6951c67de3610b021fe1acb5c917f5f93748677c22b48e0ac121970e18.png" src="_images/cf2e9f6951c67de3610b021fe1acb5c917f5f93748677c22b48e0ac121970e18.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" src="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" />
+</div>
+</div>
+</section>
+<section id="h3-polygons-don-t-need-to-follow-the-right-hand-rule">
+<h2>H3 Polygons don’t need to follow the right-hand rule<a class="headerlink" href="#h3-polygons-don-t-need-to-follow-the-right-hand-rule" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> objects do not need to follow the “right-hand rule”, unlike GeoJSON Polygons.
+The right-hand rule requires that vertices in outer loops are listed in counterclockwise
+order and holes are listed in clockwise order.
+<code class="docutils literal notranslate"><span class="pre">h3-py</span></code> accepts loops in any order and will usually interpret them as the user intended, for example,
+converting to sets of cells. However, <code class="docutils literal notranslate"><span class="pre">h3-py</span></code> won’t re-order your loops to
+conform to the right-hand rule, so be careful if you’re using <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> to plot them.</p>
+<p>Obeying the right-hand rule is only a concern when creating <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> objects from external input; <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> or <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code>
+objects created through <code class="docutils literal notranslate"><span class="pre">h3.cells_to_h3shape()</span></code> <strong>will respect the right-hand rule</strong>.</p>
+<p>For example, if we reverse the order of one of the holes in our example polygon above,
+the hole won’t be rendered correctly, but the conversion to cells will remain unchanged.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Respects right-hand rule</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">,</span> <span class="n">hole1</span><span class="p">,</span> <span class="n">hole2</span><span class="p">)</span>
+<span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" src="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Does not respect right-hand-rule; second hole is reversed</span>
+<span class="c1"># Conversion to cells still works, tho!</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">,</span> <span class="n">hole1</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">hole2</span><span class="p">)</span>
+<span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" src="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Does not respect right-hand-rule; outer loop and second hole are both reversed</span>
+<span class="c1"># Conversion to cells still works, tho!</span>
+<span class="n">poly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span><span class="n">outer</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">hole1</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">hole2</span><span class="p">)</span>
+<span class="n">plot_shape_and_cells</span><span class="p">(</span><span class="n">poly</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" src="_images/74dda68b70d9f5a644a0cb47c691cf471f1efd49e15ac95a9beb2f65ca447bd5.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="latlngmultipoly">
+<h1>LatLngMultiPoly<a class="headerlink" href="#latlngmultipoly" title="Link to this heading">#</a></h1>
+<p>An <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> can be created from <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> objects. The string representation of the <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code>
+gives the number of vertices in the outer loop of each <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code>, along with the number of vertices
+in each hole (if there are any).</p>
+<p>For example <code class="docutils literal notranslate"><span class="pre">&lt;LatLngMultiPoly:</span> <span class="pre">[3],</span> <span class="pre">[4/(5,)]&gt;</span></code> represents an <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> consisting of two <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> polygons:</p>
+<ul class="simple">
+<li><p>the first polygon has 3 outer vertices and no holes</p></li>
+<li><p>the second polygon has 4 outer vertices and 1 hole with 5 vertices</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">poly1</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">([(</span><span class="mf">37.804</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.412</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.778</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.507</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.733</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.501</span><span class="p">)])</span>
+<span class="n">poly2</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngPoly</span><span class="p">(</span>
+    <span class="p">[(</span><span class="mf">37.803</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.408</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.736</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.491</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.738</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.380</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.787</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.39</span><span class="p">)],</span>
+    <span class="p">[(</span><span class="mf">37.760</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.441</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.772</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.427</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.773</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.404</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.758</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.401</span><span class="p">),</span> <span class="p">(</span><span class="mf">37.745</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.428</span><span class="p">)]</span>
+<span class="p">)</span>
+<span class="n">mpoly</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">LatLngMultiPoly</span><span class="p">(</span><span class="n">poly1</span><span class="p">,</span> <span class="n">poly2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">poly1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">poly2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mpoly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3]&gt;
+&lt;LatLngPoly: [4/(5,)]&gt;
+&lt;LatLngMultiPoly: [3], [4/(5,)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_shape</span><span class="p">(</span><span class="n">mpoly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/eb165bf57cb1f46e186836f9bba48879e9b35a0cf8925e42b46ca931bc3e626c.png" src="_images/eb165bf57cb1f46e186836f9bba48879e9b35a0cf8925e42b46ca931bc3e626c.png" />
+</div>
+</div>
+<section id="multipolygon-to-cells">
+<h2>MultiPolygon to cells<a class="headerlink" href="#multipolygon-to-cells" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">h3.h3shape_to_cells()</span></code> works on both <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> objects (both are subclasses of <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cells</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">h3shape_to_cells</span><span class="p">(</span><span class="n">mpoly</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plot_cells</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/13d30647a4a9eb2b3549cca557012ba96d9ba53c3d082501d689e64dfcd2a6c8.png" src="_images/13d30647a4a9eb2b3549cca557012ba96d9ba53c3d082501d689e64dfcd2a6c8.png" />
+</div>
+</div>
+</section>
+<section id="latlngmultipoly-affordances">
+<h2>LatLngMultiPoly affordances<a class="headerlink" href="#latlngmultipoly-affordances" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Calling <code class="docutils literal notranslate"><span class="pre">len()</span></code> on an <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> gives the number of polygons</p></li>
+<li><p>You can iterate through a <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code>, with the elements being the underlying <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code>s</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">mpoly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">mpoly</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [3]&gt;
+&lt;LatLngPoly: [4/(5,)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">mpoly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;LatLngPoly: [3]&gt;, &lt;LatLngPoly: [4/(5,)]&gt;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h2><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> implements <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code>, and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> objects can also be created through <code class="docutils literal notranslate"><span class="pre">h3.geo_to_h3shape()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">mpoly</span><span class="o">.</span><span class="n">__geo_interface__</span>
+<span class="n">d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;type&#39;: &#39;MultiPolygon&#39;,
+ &#39;coordinates&#39;: ((((-122.412, 37.804),
+    (-122.507, 37.778),
+    (-122.501, 37.733),
+    (-122.412, 37.804)),),
+  (((-122.408, 37.803),
+    (-122.491, 37.736),
+    (-122.38, 37.738),
+    (-122.39, 37.787),
+    (-122.408, 37.803)),
+   ((-122.441, 37.76),
+    (-122.427, 37.772),
+    (-122.404, 37.773),
+    (-122.401, 37.758),
+    (-122.428, 37.745),
+    (-122.441, 37.76))))}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="n">MockGeo</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<span class="n">h3</span><span class="o">.</span><span class="n">geo_to_h3shape</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngMultiPoly: [3], [4/(5,)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cells-to-latlngpoly-or-latlngmultipoly">
+<h1>Cells to LatLngPoly or LatLngMultiPoly<a class="headerlink" href="#cells-to-latlngpoly-or-latlngmultipoly" title="Link to this heading">#</a></h1>
+<p>If you have a set of H3 cells that you would like to visualize, you may want to convert them to <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> or <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> objects using <code class="docutils literal notranslate"><span class="pre">h3.cells_to_h3shape()</span></code> and then use <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> to get their GeoJSON representation. Or you could
+use <code class="docutils literal notranslate"><span class="pre">h3.cells_to_geo()</span></code> to get the GeoJSON dictionary directly.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">latlng_to_cell</span><span class="p">(</span><span class="mf">37.804</span><span class="p">,</span> <span class="o">-</span><span class="mf">122.412</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">cells</span> <span class="o">=</span> <span class="n">h3</span><span class="o">.</span><span class="n">grid_ring</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">cells</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;89283082b57ffff&#39;,
+ &#39;89283082b43ffff&#39;,
+ &#39;89283082b4bffff&#39;,
+ &#39;89283080cb3ffff&#39;,
+ &#39;89283080ca3ffff&#39;,
+ &#39;89283080ca7ffff&#39;,
+ &#39;89283080dd3ffff&#39;,
+ &#39;89283082b6fffff&#39;,
+ &#39;89283082b67ffff&#39;,
+ &#39;89283082b77ffff&#39;,
+ &#39;89283082b0fffff&#39;,
+ &#39;89283082b0bffff&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cells</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/a778659e0bfd184b9281f76b2171f684797ff753b4c2a3b671035aa7d5b4c1f3.png" src="_images/a778659e0bfd184b9281f76b2171f684797ff753b4c2a3b671035aa7d5b4c1f3.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h3</span><span class="o">.</span><span class="n">cells_to_h3shape</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [30/(18,)]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">str</span><span class="p">(</span><span class="n">h3</span><span class="o">.</span><span class="n">cells_to_geo</span><span class="p">(</span><span class="n">cells</span><span class="p">))[:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&quot;{&#39;type&#39;: &#39;Polygon&#39;, &#39;coordinates&#39;: (((-122.4136666660363, 37.79467622784018), (-122.41133521694228, 37.79485434566282), (-122.41026351803329, 37.79653679957154), (-122.40793197004145, 37.7967148637251&quot;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="api-summary">
+<h1>API Summary<a class="headerlink" href="#api-summary" title="Link to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Geo object&quot;</span> <span class="o">&lt;-&gt;</span> <span class="n">H3Shape</span> <span class="o">&lt;-&gt;</span> <span class="n">H3</span> <span class="n">cells</span>
+</pre></div>
+</div>
+<p>“Geo objects” are any Python object that implements <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code>. This is a widely used
+standard in geospatial Python and is used by libraries like <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and Shapely.</p>
+<p><code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> is an abstract class implemented by <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code>, each of which
+implement <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> and can be created from external “Geo objects”:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">geo_to_h3shape()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h3shape_to_geo()</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> objects can be converted to and from sets of H3 cells:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">h3shape_to_cells()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cells_to_h3shape()</span></code></p></li>
+</ul>
+<p>For convience, we provide functions that hide the intermediate <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> representation:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">geo_to_cells()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cells_to_geo()</span></code></p></li>
+</ul>
+<section id="equivalance-notes">
+<h2>Equivalance notes<a class="headerlink" href="#equivalance-notes" title="Link to this heading">#</a></h2>
+<p>Note that if an object <code class="docutils literal notranslate"><span class="pre">a</span></code> is an <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code>
+then the following two expressions are equivalent:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">h3shape_to_geo(a)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">a.__geo_interface__</span></code></p></li>
+</ul>
+<p>Also note that if <code class="docutils literal notranslate"><span class="pre">a</span></code> is an <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code>, then <code class="docutils literal notranslate"><span class="pre">a</span></code> “passes through” <code class="docutils literal notranslate"><span class="pre">geo_to_h3shape()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">geo_to_h3shape</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">a</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="interfacing-with-geopandas-and-other-libraries">
+<h1>Interfacing with GeoPandas and other libraries<a class="headerlink" href="#interfacing-with-geopandas-and-other-libraries" title="Link to this heading">#</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> compatibility allows <code class="docutils literal notranslate"><span class="pre">h3-py</span></code> to work with <code class="docutils literal notranslate"><span class="pre">geopandas</span></code> and other geospatial libraries easily.</p>
+<p>To demonstrate, we start with a GeoPandas <code class="docutils literal notranslate"><span class="pre">GeoDataFrame</span></code> describing the five New York City boroughs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">geodatasets</span><span class="o">.</span><span class="n">get_path</span><span class="p">(</span><span class="s1">&#39;nybb&#39;</span><span class="p">))</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading file &#39;nybb_16a.zip&#39; from &#39;https://github.com/geopandas/geodatasets/raw/refs/heads/main/data_backup/nybb_16a.zip&#39; to &#39;/home/runner/.cache/geodatasets&#39;.
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting &#39;nybb_16a/nybb.shp&#39; from &#39;/home/runner/.cache/geodatasets/nybb_16a.zip&#39; to &#39;/home/runner/.cache/geodatasets/nybb_16a.zip.unzip&#39;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting &#39;nybb_16a/nybb.shx&#39; from &#39;/home/runner/.cache/geodatasets/nybb_16a.zip&#39; to &#39;/home/runner/.cache/geodatasets/nybb_16a.zip.unzip&#39;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting &#39;nybb_16a/nybb.dbf&#39; from &#39;/home/runner/.cache/geodatasets/nybb_16a.zip&#39; to &#39;/home/runner/.cache/geodatasets/nybb_16a.zip.unzip&#39;
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Extracting &#39;nybb_16a/nybb.prj&#39; from &#39;/home/runner/.cache/geodatasets/nybb_16a.zip&#39; to &#39;/home/runner/.cache/geodatasets/nybb_16a.zip.unzip&#39;
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BoroCode</th>
+      <th>BoroName</th>
+      <th>Shape_Leng</th>
+      <th>Shape_Area</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>Staten Island</td>
+      <td>330470.010332</td>
+      <td>1.623820e+09</td>
+      <td>MULTIPOLYGON (((970217.022 145643.332, 970227....</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Queens</td>
+      <td>896344.047763</td>
+      <td>3.045213e+09</td>
+      <td>MULTIPOLYGON (((1029606.077 156073.814, 102957...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Brooklyn</td>
+      <td>741080.523166</td>
+      <td>1.937479e+09</td>
+      <td>MULTIPOLYGON (((1021176.479 151374.797, 102100...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>Manhattan</td>
+      <td>359299.096471</td>
+      <td>6.364715e+08</td>
+      <td>MULTIPOLYGON (((981219.056 188655.316, 980940....</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>Bronx</td>
+      <td>464392.991824</td>
+      <td>1.186925e+09</td>
+      <td>MULTIPOLYGON (((1012821.806 229228.265, 101278...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;BoroName&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3488afe96e98e37e015a136a717ecdd0a10743d8def83c34e77dd4f7ed2f7325.png" src="_images/3488afe96e98e37e015a136a717ecdd0a10743d8def83c34e77dd4f7ed2f7325.png" />
+</div>
+</div>
+<section id="use-a-compatible-crs-before-applying-h3-functions">
+<h2>Use a compatible CRS before applying H3 functions<a class="headerlink" href="#use-a-compatible-crs-before-applying-h3-functions" title="Link to this heading">#</a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">h3.geo_to_cells(geo,</span> <span class="pre">res)</span></code> takes some “geo object” that implements <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code> (<a class="reference external" href="https://gist.github.com/sgillies/2217756">https://gist.github.com/sgillies/2217756</a>) — like a Shapely Polygon or MultiPolygon — and converts it to the set of cells whose centroids are contained in <code class="docutils literal notranslate"><span class="pre">geo</span></code>.</p>
+<p><strong>Common Pitfall</strong>: Be careful about what CRS you are using. <code class="docutils literal notranslate"><span class="pre">h3-py</span></code> expects coordinates as latitude-longitude pairs. The CRS of the current dataframe (EPSG:2263) gives coordinates in feet! You should first convert the data to something compatible. A common choice is <strong>EPSG:4326/WGS84</strong>. You’ll get incorrect results if you apply <code class="docutils literal notranslate"><span class="pre">h3.geo_to_cells</span></code> without converting.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Original CRS</span>
+<span class="n">df</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Projected CRS: EPSG:2263&gt;
+Name: NAD83 / New York Long Island (ftUS)
+Axis Info [cartesian]:
+- X[east]: Easting (US survey foot)
+- Y[north]: Northing (US survey foot)
+Area of Use:
+- name: United States (USA) - New York - counties of Bronx; Kings; Nassau; New York; Queens; Richmond; Suffolk.
+- bounds: (-74.26, 40.47, -71.8, 41.3)
+Coordinate Operation:
+- name: SPCS83 New York Long Island zone (US survey foot)
+- method: Lambert Conic Conformal (2SP)
+Datum: North American Datum 1983
+- Ellipsoid: GRS 1980
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7f58c608e1a88cb8f2bec0f852fd0b198a864168a63a61e67d919b0b7cccdd41.svg" src="_images/7f58c608e1a88cb8f2bec0f852fd0b198a864168a63a61e67d919b0b7cccdd41.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Converting to EPSG:4326/WGS84</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">epsg</span><span class="o">=</span><span class="mi">4326</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">crs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Geographic 2D CRS: EPSG:4326&gt;
+Name: WGS 84
+Axis Info [ellipsoidal]:
+- Lat[north]: Geodetic latitude (degree)
+- Lon[east]: Geodetic longitude (degree)
+Area of Use:
+- name: World.
+- bounds: (-180.0, -90.0, 180.0, 90.0)
+Datum: World Geodetic System 1984 ensemble
+- Ellipsoid: WGS 84
+- Prime Meridian: Greenwich
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note that the `geometry` column now has coordinates in degrees</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>BoroCode</th>
+      <th>BoroName</th>
+      <th>Shape_Leng</th>
+      <th>Shape_Area</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+      <td>Staten Island</td>
+      <td>330470.010332</td>
+      <td>1.623820e+09</td>
+      <td>MULTIPOLYGON (((-74.05051 40.56642, -74.05047 ...</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4</td>
+      <td>Queens</td>
+      <td>896344.047763</td>
+      <td>3.045213e+09</td>
+      <td>MULTIPOLYGON (((-73.83668 40.59495, -73.83678 ...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>Brooklyn</td>
+      <td>741080.523166</td>
+      <td>1.937479e+09</td>
+      <td>MULTIPOLYGON (((-73.86706 40.58209, -73.86769 ...</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>Manhattan</td>
+      <td>359299.096471</td>
+      <td>6.364715e+08</td>
+      <td>MULTIPOLYGON (((-74.01093 40.68449, -74.01193 ...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2</td>
+      <td>Bronx</td>
+      <td>464392.991824</td>
+      <td>1.186925e+09</td>
+      <td>MULTIPOLYGON (((-73.89681 40.79581, -73.89694 ...</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="converting-a-geo-to-h3-cells">
+<h2>Converting a geo to H3 cells<a class="headerlink" href="#converting-a-geo-to-h3-cells" title="Link to this heading">#</a></h2>
+<p>First, we select one of the boroughs and get the Shapely <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> describing it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">geo</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">geo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shapely.geometry.multipolygon.MultiPolygon
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that Shapely <code class="docutils literal notranslate"><span class="pre">MultiPolygon</span></code> objects implement <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code>, so we can use <code class="docutils literal notranslate"><span class="pre">h3.geo_to_cells()</span></code> to get the associated set of H3 cells at various resolutions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h3</span><span class="o">.</span><span class="n">geo_to_cells</span><span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;862a1062fffffff&#39;, &#39;862a10627ffffff&#39;, &#39;862a1060fffffff&#39;, &#39;862a10607ffffff&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_cells</span><span class="p">(</span><span class="n">h3</span><span class="o">.</span><span class="n">geo_to_cells</span><span class="p">(</span><span class="n">geo</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/35a225d8a009242d2f8f4110e3188ef1f950f2dd4f5f83a3f8271a8f64e2bc2c.png" src="_images/35a225d8a009242d2f8f4110e3188ef1f950f2dd4f5f83a3f8271a8f64e2bc2c.png" />
+</div>
+</div>
+</section>
+<section id="converting-all-geos-in-a-geodataframe-to-cells">
+<h2>Converting all geos in a GeoDataFrame to cells<a class="headerlink" href="#converting-all-geos-in-a-geodataframe-to-cells" title="Link to this heading">#</a></h2>
+<p>We can apply <code class="docutils literal notranslate"><span class="pre">geo_to_cells()</span></code> to each of the Shapely geometries in the <code class="docutils literal notranslate"><span class="pre">df.geometry</span></code> column.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_column</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">h3</span><span class="o">.</span><span class="n">geo_to_cells</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">res</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">cell_column</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    [882a106353fffff, 882a106253fffff, 882a107505f...
+1    [882a103917fffff, 882a103825fffff, 882a10391df...
+2    [882a1076d9fffff, 882a103929fffff, 882a107627f...
+3    [882a100d0dfffff, 882a100f2dfffff, 882a100f67f...
+4    [882a100f5dfffff, 882a100f43fffff, 882a100007f...
+Name: geometry, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-cells-to-geo-objects">
+<h2>Converting cells to “geo objects”<a class="headerlink" href="#converting-cells-to-geo-objects" title="Link to this heading">#</a></h2>
+<p>If we assign <code class="docutils literal notranslate"><span class="pre">df.geometry</span> <span class="pre">=</span> <span class="pre">cell_column</span></code> we’ll get an error because the <code class="docutils literal notranslate"><span class="pre">geometry</span></code> column of a <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code> must contain valid geometry objects.
+We can obtain compatible objects by converting the cells to <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> by applying <code class="docutils literal notranslate"><span class="pre">h3.cells_to_h3shape()</span></code>.</p>
+<p>(Note that, unfortunately, Pandas has some logic to identify iterable members of a series and then renders a tuple of the elements, rather than our preferred <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly.__repr__</span></code> representation.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shape_column</span> <span class="o">=</span> <span class="n">cell_column</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">h3</span><span class="o">.</span><span class="n">cells_to_h3shape</span><span class="p">)</span>
+<span class="n">shape_column</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0                                  &lt;LatLngPoly: [132]&gt;
+1    (&lt;LatLngPoly: [178/(6,)]&gt;, &lt;LatLngPoly: [66/(6...
+2    (&lt;LatLngPoly: [166/(6, 6, 6)]&gt;, &lt;LatLngPoly: [...
+3                                  &lt;LatLngPoly: [120]&gt;
+4    (&lt;LatLngPoly: [120]&gt;, &lt;LatLngPoly: [10]&gt;, &lt;Lat...
+Name: geometry, dtype: object
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the column now consists of <code class="docutils literal notranslate"><span class="pre">LatLngPoly</span></code> and <code class="docutils literal notranslate"><span class="pre">LatLngMultiPoly</span></code> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shape_column</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngPoly: [132]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">shape_column</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;LatLngMultiPoly: [178/(6,)], [66/(6,)], [30], [22], [10], [6], [6]&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, if we assign <code class="docutils literal notranslate"><span class="pre">df.geometry</span> <span class="pre">=</span> <span class="pre">shape_column</span></code>, our <code class="docutils literal notranslate"><span class="pre">H3Shape</span></code> objects will automatically be converted to Shapely Polygon and MultiPolygon objects via <code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">shape_column</span>
+<span class="n">df</span><span class="o">.</span><span class="n">geometry</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    POLYGON ((-74.16923 40.63736, -74.17365 40.640...
+1    MULTIPOLYGON (((-73.72973 40.70987, -73.73412 ...
+2    MULTIPOLYGON (((-73.87032 40.57958, -73.86396 ...
+3    POLYGON ((-73.96204 40.74616, -73.95566 40.747...
+4    MULTIPOLYGON (((-73.79671 40.85187, -73.7923 4...
+Name: geometry, dtype: geometry
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">geometry</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shapely.geometry.polygon.Polygon
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-h3-cells">
+<h2>Visualizing H3 cells<a class="headerlink" href="#visualizing-h3-cells" title="Link to this heading">#</a></h2>
+<p>We took some Shapely geometry objects, converted them to H3 cells, and converted those back to Shapely geometry objects in a <code class="docutils literal notranslate"><span class="pre">geopandas.GeoDataFrame</span></code>.</p>
+<p>We can visualize the results with our helper function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;BoroName&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/228184d5710e5ff11506b49b096e2dcf82287f7d4232ae4a4182ff01417c5b62.png" src="_images/228184d5710e5ff11506b49b096e2dcf82287f7d4232ae4a4182ff01417c5b62.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="api_verbose.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">API Verbose Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="api_comparison.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Comparison of APIs</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Polygon Tutorial</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngpoly">LatLngPoly</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#string-representation-and-attributes">String representation and attributes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geo-interface"><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polygon-to-cells">Polygon to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#h3-polygons-don-t-need-to-follow-the-right-hand-rule">H3 Polygons don’t need to follow the right-hand rule</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngmultipoly">LatLngMultiPoly</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multipolygon-to-cells">MultiPolygon to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#latlngmultipoly-affordances">LatLngMultiPoly affordances</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><code class="docutils literal notranslate"><span class="pre">__geo_interface__</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cells-to-latlngpoly-or-latlngmultipoly">Cells to LatLngPoly or LatLngMultiPoly</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#api-summary">API Summary</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#equivalance-notes">Equivalance notes</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#interfacing-with-geopandas-and-other-libraries">Interfacing with GeoPandas and other libraries</a><ul class="pst-show_toc_level nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-compatible-crs-before-applying-h3-functions">Use a compatible CRS before applying H3 functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-a-geo-to-h3-cells">Converting a geo to H3 cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-all-geos-in-a-geodataframe-to-cells">Converting all geos in a GeoDataFrame to cells</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#converting-cells-to-geo-objects">Converting cells to “geo objects”</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-h3-cells">Visualizing H3 cells</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Uber Technologies
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
